@@ -9,8 +9,10 @@
 */
 #include <Arduino.h>
 #include <U8x8lib.h>
+#include <Joystick.h>
 
 U8X8_SH1106_128X64_NONAME_HW_I2C u8x8(/* reset=*/U8X8_PIN_NONE);
+Joystick_ Joystick;
 
 int analogReadWithFilter();
 
@@ -23,12 +25,16 @@ void setup(void)
   u8x8.setFont(u8x8_font_inb46_4x8_n);
   // 降低屏幕亮度
   u8x8.setContrast(64);
+  // 初始化USB游戏控制器
+  Joystick.begin();
 }
 
 void loop(void)
 {
   // 读传感器值
   int aValue = analogReadWithFilter();
+  // 手柄上报
+  Joystick.setThrottle(aValue);
   // 转换数据范围
   aValue = aValue / 10;
   // 串口上报

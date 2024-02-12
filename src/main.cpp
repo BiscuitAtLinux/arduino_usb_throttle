@@ -18,8 +18,6 @@ int analogReadWithFilter();
 
 void setup(void)
 {
-  // 设置串口，上报ADC值
-  Serial.begin(9600);
   u8x8.begin();
   // 设置大字体，占满一行
   u8x8.setFont(u8x8_font_inb46_4x8_n);
@@ -35,10 +33,6 @@ void loop(void)
   int aValue = analogReadWithFilter();
   // 手柄上报
   Joystick.setThrottle(aValue);
-  // 转换数据范围
-  aValue = aValue / 10;
-  // 串口上报
-  Serial.println(aValue);
 
   // 屏幕显示
   char showStr[5];

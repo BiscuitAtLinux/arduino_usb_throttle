@@ -36,7 +36,9 @@ void loop(void)
 
   // 屏幕显示
   char showStr[5];
-  sprintf(showStr, "%4d", aValue);
+  // 归一化到100
+  float nValue = (float)aValue / 10.23;
+  sprintf(showStr, "%4d", (int)nValue); // avr的sprintf默认竟然不支持处理浮点
   u8x8.home();
   u8x8.print(showStr);
 }

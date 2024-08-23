@@ -18,6 +18,8 @@ int analogReadWithFilter();
 
 void setup(void)
 {
+  // 提高响应速度，比默认频率高一倍，实际提高应该不到一倍
+  u8x8.setBusClock(800000);
   u8x8.begin();
   // 设置大字体，占满一行
   u8x8.setFont(u8x8_font_inb46_4x8_n);
